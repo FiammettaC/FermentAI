@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FermentAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+/* Set height of body and the document to 100% */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
+        #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #textInput {
+        width: 90%;
+        border: none;
+        border-bottom: 3px solid black;
+        font-family: monospace;
+        font-size: 17px;
+      }
+      .userText {
+        color: rgb(0, 0, 0);
+        font-family: monospace;
+        font-size: 17px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background-color: #d4f0f1;
+        padding: 10px;
+        /* padding-left: -20px; */
+        border-radius: 2px;
+      }
+      .botText {
+        color: rgb(5, 5, 5);
+        font-family: monospace;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background-color: #f7e7f6;
+        padding: 10px;
+        /* padding-right: -20px; */
+        border-radius: 2px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 78%;
+        margin-top: 60px;
+        border: 1px solid green;
+      }
+      .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+  
+      img {
+        max-width: 120%;
+        max-height:120%;
+        /*height:"60"; 
+        width:"50";*/
+        padding-left: 135px;
+        float: left;
+      }
+  
+      .text {
+        font-size: 18px;
+        padding-left: 100px;
+        padding-right: 135px;
+        padding-top: 0%;
+        float: left;
+      }
+      .br { 
+          display: block; 
+          margin-bottom: 0em; 
+      } 
+        
+      .brmedium { 
+          display: block; 
+          margin-bottom: 1em; 
+      } 
+        
+      .brlarge { 
+          display: block; 
+          margin-bottom: 2em; 
+      } 
+    </style>
+</head>
+<body>
+<div>
+        <h1 align="center"><b>FermentAI</b></h1>
+
+        <div class="container">
+          <div class="image">
+            <img src="static\\BioVL-2.png">
+          </div>
+          <div class="text">
+            <p>This is FermentAI, a tool developped at the Technical University of Denmark (DTU) to answer fermentation questions!<br/>
+               The tool is trained on exam questions asked in the "Process Adaptation in Fermentation Based Biomanufacturing" course taught at DTU.<br/>
+               Feel free to ask me anything (about fermentation)!<br/>
+               Please note that each question should be asked in one message.</p>
+          </div>
+        </div>
+
+        <!--<h4 align="center"><b>Please start your personalized interaction with the chatbot</b></h4>
+        <p align="center">As part of the course, you are required to participate in an audit exercise. This year, we are testing our new Digital Audit Tool: FermentAI.
+        During the audit, you can ask FermentAI questions about the available documents and practices adopted by Pharma A/S, which is necessary information for you to evaluate whether it could be a valuable business partner or if detected non-conformities are too severe. 
+        Thank you for partecipating in this experiment!</p></div>
+        <p align="center"><img src="static\\chatbot.png" alt="Python-BOT" height="310" width="300"></p>-->
+        <div class="boxed">
+            <div>
+                <div id="chatbox">
+                    <p class="botText">
+                        <span>Hi! I'm FermentAI</span>
+                    </p>
+                </div>
+                <div id="userInput">
+                    <input id="textInput" type="text" name="msg" placeholder="Message" />
+                    <input id="buttonInput" type="submit" value="Send">
+                </div>
+            </div>
+            <script>
+                function getBotResponse() {
+                    var rawText = $("#textInput").val();
+                    var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+                    $("#textInput").val("");
+                    $("#chatbox").append(userHtml);
+                    document
+                        .getElementById("userInput")
+                        .scrollIntoView({ block: "start", behavior: "smooth" });
+                    $.get("/get", { msg: rawText }).done(function (data) {
+                        var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                        $("#chatbox").append(botHtml);
+                        document
+                            .getElementById("userInput")
+                            .scrollIntoView({ block: "start", behavior: "smooth" });
+                    });
+                    // $.get("/documents").done(function (pdf_name) {
+                    // });
+                }
+                $("#textInput").keypress(function (e) {
+                    if ((e.which == 13) && document.getElementById("textInput").value != "" ) {
+                        getBotResponse();
+                    }
+                });
+                $("#buttonInput").click(function() {
+                    if (document.getElementById("textInput").value != "") {
+                        getBotResponse();
+                    }
+                })
+            </script>
+        </div>
+    </div>
+</body>
+</html>
