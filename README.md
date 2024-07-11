@@ -16,6 +16,7 @@ If you would like to cite this work, please reference our paper: **SPyCE: A stru
   volume={53},
   pages={3493--3498},
   year={2024},
-  publisher={Elsevier}
+  publisher={Elsevier},
+  url = {https://www.sciencedirect.com/science/article/pii/B9780443288241505834}
 }
 ```
