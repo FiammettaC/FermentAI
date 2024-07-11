@@ -7,7 +7,7 @@ Recent developments in artificial intelligence (AI), leading to the release of c
 If you have any questions, feel free to contact Fiammetta Caccavale (fiacac@kt.dtu.dk).
 
 ## Cite this work
-If you would like to cite this work, please reference our paper: **SPyCE: A structured and tailored series of Python courses for (bio)chemical engineers**.
+If you would like to cite this work, please reference our paper: **FermentAI: Large Language Models in Chemical Engineering Education for Learning Fermentation Processes**.
 ```bibtex
 @incollection{caccavale2024fermentai,
   title={FermentAI: Large Language Models in Chemical Engineering Education for Learning Fermentation Processes},
